@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0b0b0b" name="theme-color"/>
+  <meta content="PERCEIVED TRUST &mdash; a short film about appearances, manipulation, and the danger of misplaced confidence." name="description"/>
+  <title>
+   PERCEIVED TRUST &mdash; A Short Film
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Mono:wght@400;500&amp;family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   :root {
+  --ink:#0b0b0b;
+  --paper:#e8e2d6;
+  --muted:#a9a59f;
+  --line:rgba(232,226,214,.24);
+  --red:#9f2927;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"DM Mono",monospace;
+  --display:"Bebas Neue",Impact,sans-serif}
+    * {
+  box-sizing:border-box}
+html {
+  scroll-behavior:smooth}
+body {
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.65;
+  min-width:320px}
+    button {
+  font:inherit;
+  color:inherit;
+  cursor:pointer}
+button:focus-visible,a:focus-visible {
+  outline:2px solid var(--paper);
+  outline-offset:4px}
+    .skip-link {
+  position:fixed;
+  left:1rem;
+  top:-5rem;
+  z-index:50;
+  background:var(--paper);
+  color:var(--ink);
+  padding:.7rem 1rem}
+.skip-link:focus {
+  top:1rem}
+    .site-header {
+  height:76px;
+  padding:0 clamp(1.3rem,4vw,5rem);
+  position:absolute;
+  top:0;
+  z-index:10;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line)}
+    .wordmark,.site-header nav button,.menu-button {
+  background:none;
+  border:0;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.72rem}
+.wordmark {
+  font-family:var(--display);
+  font-size:1.05rem;
+  letter-spacing:.08em}
+.wordmark span {
+  color:var(--red)}
+    .site-header nav {
+  display:flex;
+  gap:clamp(.8rem,2.8vw,2.8rem)}
+.site-header nav button {
+  padding:.4rem 0}
+.site-header nav button:hover {
+  color:#fff;
+  border-bottom:1px solid var(--red)}
+.menu-button {
+  display:none}
+    .hero {
+  min-height:100svh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden}
+.hero-image,.hero-wash {
+  inset:0;
+  position:absolute}
+.hero-image {
+  background:#202020 url('assets/hero-desk.png') center/cover no-repeat;
+  filter:grayscale(1) contrast(1.08)}
+.hero-wash {
+  background:rgba(0,0,0,.58)}
+    .hero-content {
+  position:relative;
+  z-index:1;
+  width:min(750px,88vw);
+  margin:9rem 0 5rem clamp(1.3rem,8vw,10rem)}
+.eyebrow {
+  margin:0 0 1.1rem;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.7rem;
+  color:#d7d1c6}
+.crimson {
+  color:#c6504d}
+    .hero h1 {
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(4.2rem,11.5vw,10.5rem);
+  line-height:.82;
+  letter-spacing:.015em;
+  margin:0;
+  text-shadow:0 1px 12px #000}
+.hero h1 span {
+  display:block}
+.hero h1 span:last-child {
+  color:#c6504d}
+.hero-line {
+  font-family:var(--serif);
+  font-size:clamp(1.1rem,2.1vw,1.55rem);
+  max-width:34rem;
+  margin:2rem 0 2.6rem;
+  color:#f0ece4}
+    .actions {
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap}
+.button {
+  border:1px solid var(--paper);
+  padding:1rem 1.3rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.72rem;
+  background:transparent;
+  transition:background .25s,color .25s}
+.button:hover {
+  background:var(--paper);
+  color:var(--ink)}
+.button.primary {
+  background:var(--red);
+  border-color:var(--red)}
+.button.primary:hover {
+  background:#c03a36;
+  color:#fff}
+    .scroll-prompt {
+  position:absolute;
+  bottom:1.7rem;
+  right:clamp(1.3rem,5vw,5rem);
+  z-index:1;
+  background:none;
+  border:0;
+  text-transform:uppercase;
+  font-size:.66rem;
+  letter-spacing:.16em}
+.scroll-prompt span {
+  color:var(--red);
+  font-size:1.1rem;
+  margin-left:.5rem}
+    .section {
+  padding:clamp(5rem,10vw,10rem) clamp(1.3rem,8vw,10rem)}
+.story {
+  background:var(--paper);
+  color:var(--ink)}
+.split-heading {
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr);
+  gap:clamp(2rem,7vw,8rem);
+  align-items:end}
+.section h2,.trailer-band h2,footer h2 {
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,5vw,5.8rem);
+  line-height:.95;
+  margin:0;
+  font-weight:700;
+  letter-spacing:-.05em}
+.split-heading p {
+  margin:0;
+  color:#514e48}
+    .reveal {
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .75s ease,transform .75s ease}
+.reveal.is-visible {
+  opacity:1;
+  transform:none}
+    .case-file {
+  border-top:1px solid #272625}
+.section-label {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--line);
+  padding-bottom:.8rem;
+  margin-bottom:clamp(2rem,4vw,4.5rem);
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.7rem}
+.section-label b {
+  font-family:var(--display);
+  font-size:1.4rem;
+  color:var(--red);
+  font-weight:400}
+    .case-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(3rem,10vw,12rem)}
+.case-grid h2 em,.suspects h2 em,.evidence h2 em {
+  color:var(--red);
+  font-weight:600}
+.principle-copy {
+  max-width:520px}
+.lead {
+  font-family:var(--serif);
+  font-size:1.45rem;
+  line-height:1.28;
+  margin-top:0}
+.principle-rule {
+  border-top:1px solid var(--line);
+  margin-top:2rem;
+  padding-top:1rem;
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  text-transform:uppercase;
+  font-size:.68rem;
+  letter-spacing:.1em}
+.principle-rule b {
+  font-size:.68rem;
+  color:#d9d4ca}
+    .suspects {
+  background:#141414}
+.suspects h2 {
+  margin-bottom:clamp(3rem,6vw,6rem)}
+.suspect-layout {
+  display:grid;
+  grid-template-columns:minmax(230px,.52fr) minmax(0,1.48fr);
+  border-top:1px solid var(--line)}
+.character-list {
+  padding-right:clamp(1rem,4vw,4rem)}
+.character-list button {
+  display:flex;
+  gap:1rem;
+  width:100%;
+  background:none;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:1.1rem 0;
+  text-align:left;
+  font-family:var(--serif);
+  font-size:1.2rem;
+  transition:color .2s,padding .2s}
+.character-list button span {
+  font-family:var(--sans);
+  font-size:.68rem;
+  padding-top:.45rem;
+  color:var(--muted)}
+.character-list button:hover,.character-list button.active {
+  color:#d85954;
+  padding-left:.4rem}
+    .profile {
+  display:grid;
+  grid-template-columns:minmax(190px,.9fr) 1.1fr;
+  border-left:1px solid var(--line)}
+.cast-slot {
+  min-height:370px;
+  background:#272625;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:1.3rem;
+  position:relative}
+.cast-slot:before {
+  content:"";
+  position:absolute;
+  inset:1rem;
+  border:1px solid rgba(232,226,214,.26)}
+.cast-slot span {
+  position:relative;
+  z-index:1;
+  font-family:var(--display);
+  font-size:2rem;
+  letter-spacing:.05em;
+  line-height:1}
+.cast-slot small {
+  z-index:1;
+  color:#b3aea5;
+  margin-top:.5rem;
+  max-width:16rem;
+  font-size:.65rem;
+  line-height:1.4}
+    .profile-info {
+  padding:clamp(1.5rem,4vw,4rem);
+  align-self:end}
+.profile-info h3,.evidence-note h3 {
+  font-family:var(--serif);
+  font-size:clamp(2rem,4vw,4rem);
+  line-height:1;
+  margin:.5rem 0}
+.profile-role {
+  color:#d1cbc0;
+  margin:0 0 1.6rem}
+    .evidence {
+  background:var(--paper);
+  color:var(--ink)}
+.evidence .section-label {
+  border-color:#b9b3a8}
+.evidence-header {
+  display:flex;
+  justify-content:space-between;
+  gap:4rem;
+  align-items:end;
+  margin-bottom:clamp(3rem,6vw,6rem)}
+.evidence-header p {
+  max-width:260px;
+  color:#55514b;
+  margin:0}
+.evidence-board {
+  border-top:1px solid #b9b3a8;
+  border-bottom:1px solid #b9b3a8;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr}
+.evidence-tabs {
+  padding-right:clamp(1rem,4vw,4rem)}
+.evidence-tabs button {
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1.35rem 0;
+  width:100%;
+  background:none;
+  border:0;
+  border-bottom:1px solid #b9b3a8;
+  text-align:left;
+  font-family:var(--serif);
+  font-size:1.4rem}
+.evidence-tabs button:last-child {
+  border-bottom:0}
+.evidence-tabs button span {
+  font-family:var(--sans);
+  font-size:.7rem;
+  color:#807b72}
+.evidence-tabs button[aria-selected="true"] {
+  color:var(--red)}
+.evidence-note {
+  background:#d9d1c1;
+  padding:clamp(2rem,5vw,5rem)}
+.evidence-note p {
+  max-width:440px;
+  color:#4c4943}
+.note-footer {
+  border-top:1px solid #aaa294;
+  padding-top:1rem;
+  margin-top:3rem!important;
+  font-size:.66rem;
+  letter-spacing:.1em}
+    .trailer-band {
+  padding:clamp(5rem,9vw,9rem) clamp(1.3rem,8vw,10rem);
+  background:#171616;
+  border-top:1px solid var(--line)}
+.trailer-band h2 {
+  margin-bottom:2rem}
+footer {
+  padding:clamp(4rem,8vw,8rem) clamp(1.3rem,8vw,10rem) 2.5rem;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:3rem;
+  background:#090909}
+footer h2 {
+  font-size:clamp(3.4rem,6vw,7rem)}
+footer>div>p:not(.eyebrow) {
+  max-width:400px;
+  color:#aaa59c}
+.credit-list {
+  padding-top:2rem}
+.credit-list p {
+  border-bottom:1px solid var(--line);
+  margin:0;
+  padding:.55rem 0;
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  font-size:.75rem}
+.credit-list span {
+  color:#b6b0a7}
+.closing {
+  grid-column:1/-1;
+  border-top:1px solid var(--line);
+  padding-top:2rem;
+  margin:2rem 0 0;
+  font-family:var(--display);
+  font-size:clamp(1.8rem,4vw,4rem);
+  line-height:.92;
+  letter-spacing:.04em}
+.closing span {
+  color:var(--red)}
+    .modal-backdrop[hidden] {
+  display:none!important}
+.modal-backdrop {
+  position:fixed;
+  z-index:30;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  display:grid;
+  place-items:center;
+  padding:1.3rem}
+.trailer-modal {
+  width:min(640px,100%);
+  background:var(--paper);
+  color:var(--ink);
+  padding:clamp(2rem,6vw,5rem);
+  position:relative}
+.trailer-modal .close {
+  position:absolute;
+  right:1.25rem;
+  top:1.2rem;
+  background:none;
+  border:0;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.7rem;
+  color:#4c4943}
+.trailer-modal h2 {
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,5vw,4.5rem);
+  line-height:1;
+  margin:.5rem 0 1.5rem}
+.trailer-modal p:not(.eyebrow) {
+  color:#565149;
+  margin-bottom:2rem}
+    @media(max-width:760px) {
+  .site-header {
+  height:64px}
+.site-header nav {
+  position:absolute;
+  top:64px;
+  left:0;
+  right:0;
+  background:#0b0b0b;
+  border-bottom:1px solid var(--line);
+  padding:1rem 1.3rem;
+  display:none;
+  flex-direction:column;
+  gap:.4rem}
+.site-header nav.open {
+  display:flex}
+.site-header nav button {
+  text-align:left;
+  padding:.5rem 0}
+.menu-button {
+  display:block}
+.hero-content {
+  margin-top:7rem}
+.hero h1 {
+  font-size:clamp(4rem,16vw,7rem)}
+.scroll-prompt {
+  right:1.3rem}
+.split-heading,.case-grid,.suspect-layout,.profile,.evidence-board,footer {
+  grid-template-columns:1fr}
+.evidence-header {
+  display:block}
+.evidence-header p {
+  margin-top:1.4rem}
+.character-list {
+  padding-right:0;
+  margin-bottom:2rem}
+.profile {
+  border-left:0;
+  border-top:1px solid var(--line)}
+.cast-slot {
+  min-height:280px}
+.evidence-tabs {
+  padding-right:0}
+.evidence-note {
+  min-height:310px}
+.principle-rule {
+  flex-direction:column}
+.closing {
+  margin-top:0}
+.actions {
+  gap:.7rem}
+.button {
+  padding:.9rem 1rem}
+.hero-image {
+  background-position:61% center}
+}
+    @media(prefers-reduced-motion:reduce) {
+  html {
+  scroll-behavior:auto}
+.reveal {
+  transition:none;
+  transform:none;
+  opacity:1}
+}
+  </style>
+ </head>
+ <body>
+  <a class="skip-link" href="#story">
+   Skip to film information
+  </a>
+  <header class="site-header">
+   <button aria-label="Perceived Trust &mdash; back to the opening" class="wordmark" onclick="go('film')">
+    PERCEIVED TRUST
+    <span>
+     &mdash;
+    </span>
+    01
+   </button>
+   <nav aria-label="Primary navigation" id="main-menu">
+    <button onclick="go('film')">
+     Film
+    </button>
+    <button onclick="go('case-file')">
+     Case file
+    </button>
+    <button onclick="go('suspects')">
+     Suspects
+    </button>
+    <button onclick="go('evidence')">
+     Evidence
+    </button>
+    <button onclick="go('credits')">
+     Credits
+    </button>
+   </nav>
+   <button aria-controls="main-menu" aria-expanded="false" class="menu-button" onclick="toggleMenu()">
+    Menu
+   </button>
+  </header>
+  <main>
+   <section aria-labelledby="film-title" class="hero" id="film">
+    <div aria-label="A detective's desk with photographs, files, and a desk lamp" class="hero-image" role="img">
+    </div>
+    <div class="hero-wash">
+    </div>
+    <div class="hero-content">
+     <p class="eyebrow">
+      A PSYCHOLOGICAL CRIME THRILLER
+     </p>
+     <h1 id="film-title">
+      <span>
+       PERCEIVED
+      </span>
+      <span>
+       TRUST
+      </span>
+     </h1>
+     <p class="hero-line">
+      A confession. A pattern. A truth hidden in plain sight.
+     </p>
+     <div class="actions">
+      <button class="button primary" onclick="openTrailer()">
+       View trailer
+      </button>
+      <button class="button secondary" onclick="go('case-file')">
+       Open case file
+      </button>
+     </div>
+    </div>
+    <button class="scroll-prompt" onclick="go('story')">
+     Scroll to investigate
+     <span>
+      &darr;
+     </span>
+    </button>
+   </section>
+   <section aria-labelledby="story-title" class="story section" id="story">
+    <div class="reveal">
+     <p class="eyebrow crimson">
+      THE CASE, WITHOUT THE ANSWER
+     </p>
+     <div class="split-heading">
+      <h2 id="story-title">
+       Some objects are made to help. Someone has taught them to harm.
+      </h2>
+      <p>
+       When a forced confession seems to close three murders, Detective Peter notices the staged objects left behind. Each clue pulls the case further from the obvious answer&mdash;and closer to someone inside the investigation.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="case-title" class="case-file section" id="case-file">
+    <div class="reveal">
+     <div class="section-label">
+      <span>
+       CASE FILE
+      </span>
+      <b>
+       01
+      </b>
+     </div>
+     <div class="case-grid">
+      <h2 id="case-title">
+       The principle
+       <br/>
+       <em>
+        inside the crime.
+       </em>
+      </h2>
+      <div class="principle-copy">
+       <p class="lead">
+        Attractiveness makes us look. Appropriateness asks whether something actually works for the person using it.
+       </p>
+       <p>
+        <strong>
+         Perceived Trust
+        </strong>
+        uses that tension as its murder method. A beautiful object may still fail its user. A plain object may do exactly what it must. The film asks us to stop judging by appearance&mdash;whether we are looking at a chair, a clue, or a person.
+       </p>
+       <div class="principle-rule">
+        <span>
+         DESIGN PRINCIPLE
+        </span>
+        <b>
+         Purpose changes meaning.
+        </b>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="suspects-title" class="suspects section" id="suspects">
+    <div class="reveal">
+     <div class="section-label">
+      <span>
+       PERSONS OF INTEREST
+      </span>
+      <b>
+       06
+      </b>
+     </div>
+     <h2 id="suspects-title">
+      Six faces.
+      <br/>
+      <em>
+       One version each.
+      </em>
+     </h2>
+     <div class="suspect-layout">
+      <div aria-label="Character profiles" class="character-list" id="character-list" role="tablist">
+      </div>
+      <article aria-live="polite" class="profile" role="tabpanel">
+       <div class="cast-slot">
+        <span id="cast-label">
+         CAST PHOTO / ADD PETER
+        </span>
+        <small>
+         Replace this panel with the official cast photograph.
+        </small>
+       </div>
+       <div class="profile-info">
+        <p class="eyebrow crimson" id="character-type">
+         Detective
+        </p>
+        <h3 id="character-name">
+         Detective Peter
+        </h3>
+        <p class="profile-role" id="character-role">
+         Lead investigator
+        </p>
+        <p id="character-note">
+         Observant, serious, and unable to leave a pattern alone.
+        </p>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="evidence-title" class="evidence section" id="evidence">
+    <div class="reveal">
+     <div class="section-label">
+      <span>
+       EVIDENCE LEDGER
+      </span>
+      <b>
+       03
+      </b>
+     </div>
+     <div class="evidence-header">
+      <h2 id="evidence-title">
+       Look closer.
+       <br/>
+       <em>
+        Choose a marked clue.
+       </em>
+      </h2>
+      <p>
+       Every discovery is an invitation to inspect, not an instruction to assume.
+      </p>
+     </div>
+     <div class="evidence-board">
+      <div aria-label="Evidence items" class="evidence-tabs" id="evidence-tabs" role="tablist">
+      </div>
+      <article aria-live="polite" class="evidence-note" role="tabpanel">
+       <p class="eyebrow crimson" id="evidence-category">
+        Document / 01
+       </p>
+       <h3 id="evidence-title-active">
+        The confession
+       </h3>
+       <p id="evidence-text">
+        A signed statement can look complete and still leave the essential question unanswered: who benefits from it?
+       </p>
+       <p class="note-footer">
+        LOGGED BY PETER &middot; STATUS: OPEN
+       </p>
+      </article>
+     </div>
+    </div>
+   </section>
+   <section aria-label="Trailer section" class="trailer-band">
+    <p class="eyebrow">
+     THE CLOCK IS STILL RUNNING
+    </p>
+    <h2>
+     Watch the trailer.
+     <br/>
+     Then question the file.
+    </h2>
+    <button class="button primary" onclick="openTrailer()">
+     Play trailer
+    </button>
+   </section>
+  </main>
+  <footer id="credits">
+   <div>
+    <p class="eyebrow crimson">
+     CREDITS
+    </p>
+    <h2>
+     Perceived Trust
+    </h2>
+    <p>
+     A short film by Abhi Satoeya, Sneha Sen, Charan Raj, Samiksha, Samadrita &amp; Lakshmi Ananda Kumar.
+    </p>
+   </div>
+   <div class="credit-list">
+    <p>
+     <span>
+      Detective Peter
+     </span>
+     Abhi
+    </p>
+    <p>
+     <span>
+      Officer Mira
+     </span>
+     Lakshmi
+    </p>
+    <p>
+     <span>
+      Valentine
+     </span>
+     Samiksha
+    </p>
+    <p>
+     <span>
+      Nisha
+     </span>
+     Sneha
+    </p>
+    <p>
+     <span>
+      Tara
+     </span>
+     Samadrita
+    </p>
+    <p>
+     <span>
+      Patrick
+     </span>
+     Charan
+    </p>
+   </div>
+   <p class="closing">
+    APPEAL CAN DECEIVE.
+    <br/>
+    FUNCTION CAN FAIL.
+    <br/>
+    <span>
+     TRUST CAN KILL.
+    </span>
+   </p>
+  </footer>
+  <div class="modal-backdrop" hidden="" id="trailer-modal" onclick="if(event.target===this)closeTrailer()" role="presentation">
+   <section aria-labelledby="trailer-title" aria-modal="true" class="trailer-modal" role="dialog">
+    <button class="close" onclick="closeTrailer()">
+     Close
+    </button>
+    <p class="eyebrow crimson">
+     TRAILER / 01:13
+    </p>
+    <h2 id="trailer-title">
+     The official trailer will be placed here.
+    </h2>
+    <p>
+     This space is ready for the final trailer embed or video file. Until then, the film&rsquo;s case file is open below.
+    </p>
+    <button class="button secondary" onclick="closeTrailer();go('case-file')">
+     Explore the case file
+    </button>
+   </section>
+  </div>
+  <script>
+   const characters = [
+      {name:"Detective Peter",role:"Lead investigator",type:"Detective",note:"Observant, serious, and unable to leave a pattern alone.",cast:"CAST PHOTO / ADD PETER"},
+      {name:"Officer Mira",role:"Case officer",type:"Officer",note:"Confident, sharp-tongued, and always one step inside the room.",cast:"CAST PHOTO / ADD MIRA"},
+      {name:"Valentine",role:"Unknown presence",type:"Suspect",note:"Calm, precise, and drawn to the meanings people give objects.",cast:"CAST PHOTO / ADD VALENTINE"},
+      {name:"Nisha",role:"Peter’s friend",type:"Witness",note:"Warm, witty, and the one person who sees Peter soften.",cast:"CAST PHOTO / ADD NISHA"},
+      {name:"Tara",role:"The confession",type:"Suspect",note:"Frightened, frustrated, and carrying the weight of a story that is not hers.",cast:"CAST PHOTO / ADD TARA"},
+      {name:"Patrick",role:"Police archivist",type:"Archivist",note:"Cautious, intelligent, and troubled by what the official records refuse to say.",cast:"CAST PHOTO / ADD PATRICK"}
+    ];
+    const evidence = [
+      {id:"01",title:"The confession",category:"Document",text:"A signed statement can look complete and still leave the essential question unanswered: who benefits from it?"},
+      {id:"02",title:"Altered records",category:"Archive",text:"Evidence logs shift after every crime. The pattern is not in what is present, but in what has been removed."},
+      {id:"03",title:"Objects with intent",category:"Method",text:"A familiar object becomes dangerous only when someone decides to turn its purpose against another person."}
+    ];
+    let selectedCharacter = 0, selectedEvidence = 0;
+    function go(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth"});document.getElementById("main-menu").classList.remove("open");document.querySelector(".menu-button").setAttribute("aria-expanded","false");}
+    function toggleMenu(){const nav=document.getElementById("main-menu");nav.classList.toggle("open");document.querySelector(".menu-button").setAttribute("aria-expanded",nav.classList.contains("open"));}
+    function renderCharacters(){
+      const list=document.getElementById("character-list");list.innerHTML="";
+      characters.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.className=i===selectedCharacter?"active":"";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(i===selectedCharacter));b.innerHTML=`<span>${String(i+1).padStart(2,"0")}</span>${c.name}`;b.addEventListener("click",()=>{selectedCharacter=i;renderCharacters();});list.appendChild(b);});
+      const c=characters[selectedCharacter];document.getElementById("cast-label").textContent=c.cast;document.getElementById("character-type").textContent=c.type;document.getElementById("character-name").textContent=c.name;document.getElementById("character-role").textContent=c.role;document.getElementById("character-note").textContent=c.note;
+    }
+    function renderEvidence(){
+      const tabs=document.getElementById("evidence-tabs");tabs.innerHTML="";
+      evidence.forEach((e,i)=>{const b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(i===selectedEvidence));b.innerHTML=`<span>${e.id}</span>${e.title}`;b.addEventListener("click",()=>{selectedEvidence=i;renderEvidence();});tabs.appendChild(b);});
+      const e=evidence[selectedEvidence];document.getElementById("evidence-category").textContent=`${e.category} / ${e.id}`;document.getElementById("evidence-title-active").textContent=e.title;document.getElementById("evidence-text").textContent=e.text;
+    }
+    function openTrailer(){document.getElementById("trailer-modal").hidden=false;document.querySelector("#trailer-modal .close").focus();}
+    function closeTrailer(){document.getElementById("trailer-modal").hidden=true;}
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTrailer();});
+    const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");revealObserver.unobserve(entry.target);}}),{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(node=>revealObserver.observe(node));
+    renderCharacters();renderEvidence();
+  </script>
+ </body>
+</html>
